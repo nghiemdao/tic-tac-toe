@@ -45,17 +45,8 @@ class Game extends Component {
   }
 
   render() {
-    const history = this.state.history;
-    const current = history[this.state.stepNumber];
-
-    const moves = history.map((step, move) => {
-      const desc = move ? "Go to move #" + move : "Go to game start";
-      return (
-        <li key={move}>
-          <button onClick={() => this.jumpTo(move)}>{desc}</button>
-        </li>
-      );
-    });
+    const { history, stepNumber } = this.state;
+    const current = history[stepNumber];
 
     return (
       <div className="game">
@@ -64,7 +55,7 @@ class Game extends Component {
         </div>
         <div className="game-info">
           <div>{this.displayStatus(current)}</div>
-          <ol>{moves}</ol>
+          <ol>{this.getMoves(history)}</ol>
         </div>
       </div>
     );
@@ -79,6 +70,17 @@ class Game extends Component {
       status = "Next player: " + (this.state.xIsNext ? "X" : "O");
     }
     return status;
+  };
+
+  getMoves = history => {
+    history.map((step, move) => {
+      const desc = move ? "Go to move #" + move : "Go to game start";
+      return (
+        <li key={move}>
+          <button onClick={() => this.jumpTo(move)}>{desc}</button>
+        </li>
+      );
+    });
   };
 }
 
