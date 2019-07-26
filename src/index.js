@@ -1,10 +1,10 @@
-import React from "react";
+import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import Board from "./components/board";
 import calculateWinner from "./helpers/calculate_winner";
 
-class Game extends React.Component {
+class Game extends Component {
   constructor(props) {
     super(props);
     this.state = {
